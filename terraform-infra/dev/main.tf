@@ -37,7 +37,7 @@ module "my_route_table" {
 }
 
 resource "aws_iam_role" "ecsInstanceRole" {
-    name = "opstreeEcsInstanceRole"
+    name_prefix = "opstreeEcsInstanceRole"
     assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
