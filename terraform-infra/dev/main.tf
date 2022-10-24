@@ -169,7 +169,7 @@ resource "aws_autoscaling_group" "opstree_ecs_asg" {
   }
 }
 
-/*
+
 resource "aws_ecs_task_definition" "service" {
   family = "webapp"
   network_mode = "bridge"
@@ -179,16 +179,37 @@ resource "aws_ecs_task_definition" "service" {
   execution_role_arn       = "arn:aws:iam::335961360975:role/dockerhub-role"
   container_definitions = jsonencode([
     {
-      name      = "ecs-webcontainer"
-      image     = "gowthama97/ecs-webimage4"
-      memory    = 512
+      name      = "ecs-dbcontainer"
+      image     = "335961360975.dkr.ecr.ap-south-1.amazonaws.com/mysql"
+      memoryReservation    = 512
       essential = true
-      secrets   = [
+      portMappings = [
         {
-          name = "dockerhub_secret"
-          valueFrom = "arn:aws:secretsmanager:ap-south-1:335961360975:secret:dockerhubcred-IhkPOL"
+          containerPort = 3306
+          hostPort      = 3306
         }
       ]
+      environment = [
+        {
+          name  = "MYSQL_DATABASE"
+          value = "employeedb"
+        },
+        {
+          name   = "MYSQL_HOST"
+          value  = "localhost"
+        },
+        {
+          name   = "MYSQL_ROOT_PASSWORD"
+          value  = "password"
+        }
+      ]
+    },
+    {
+      name      = "ecs-webcontainer"
+      image     = "335961360975.dkr.ecr.ap-south-1.amazonaws.com/webapp"
+      memory    = 512
+      essential = true
+      links	= ["ecs-dbcontainer"]
       portMappings = [
         {
           containerPort = 8080
@@ -217,7 +238,7 @@ resource "aws_ecs_task_definition" "service" {
     host_path = "/ecs/my-storage"
   }
 }
-*/
+
 
 
 
