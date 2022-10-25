@@ -85,4 +85,6 @@ module "my_load_balancer" {
   public_alb_security_group_ids   = module.my_security_groups.public_alb_security_group_id
 }
 
-
+output "public_alb_dns_name" {
+  value = module.my_load_balancer.public_alb_dns
+}
