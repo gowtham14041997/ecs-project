@@ -117,7 +117,7 @@ resource "aws_security_group" "ecs_instance_security_group" {
   }
 
   tags = {
-    Name = "My public ALB security group"
+    Name = "My ECS instance security group"
   }
 }
 
@@ -146,7 +146,7 @@ resource "aws_launch_template" "opstree_ecs_launch_template" {
   tag_specifications {
     resource_type = "instance"
     tags = {
-      Name = "My appserver instance"
+      Name = "My ECS instance"
     }
   }
 }
@@ -206,7 +206,7 @@ resource "aws_ecs_task_definition" "service" {
     {
       name      = "ecs-webcontainer"
       image     = "335961360975.dkr.ecr.ap-south-1.amazonaws.com/webapp"
-      memory    = 512
+      memoryReservation    = 512
       essential = true
       links	= ["ecs-dbcontainer"]
       portMappings = [
