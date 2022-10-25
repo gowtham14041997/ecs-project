@@ -58,3 +58,30 @@ variable "webapp_container_image_repo" {
   default       = "335961360975.dkr.ecr.ap-south-1.amazonaws.com/webapp"
   description   = "Webapp container image repository url"
 } 
+
+#--------------------------------------------------------------------------------
+#ECS service
+#-----------
+
+variable "ecs_service_launch_type" {
+  type          = string
+  description   = "ECS service launch type"
+}
+
+variable "ecs_service_name" {
+  type          = string
+  default       = "my-ecs-service"
+  description   = "ECS service name"
+} 
+
+variable "ecs_cluster_id" {
+  type          = string
+  description   = "ECS cluster ID"
+}
+
+variable "ecs_service_scheduling_strategy" {
+  type          = string
+  description   = "ECS service launch type scheduling strategy"
+}
+
+

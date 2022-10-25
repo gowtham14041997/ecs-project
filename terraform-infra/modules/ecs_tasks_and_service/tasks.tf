@@ -70,3 +70,15 @@ resource "aws_ecs_task_definition" "opstree_task_definition" {
     host_path = "/ecs/my-storage"
   }
 }
+
+#--------------------------------------------------------------------------------
+#ECS service
+#-----------
+
+resource "aws_ecs_service" "opstree_ecs_service" {
+  launch_type         = var.ecs_service_launch_type
+  name                = var.ecs_service_name #"bar"
+  cluster             = var.ecs_cluster_id #aws_ecs_cluster.foo.id
+  task_definition     = aws_ecs_task_definition.opstree_task_definition.arn
+  scheduling_strategy = var.ecs_service_scheduling_strategy
+}

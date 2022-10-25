@@ -60,12 +60,16 @@ module "my_ecs_cluster" {
 }
 
 module "my_ecs_tasks_and_service" {
-  source                        = "../modules/ecs_tasks_and_service"
+  source                          = "../modules/ecs_tasks_and_service"
 
   #ECS task definition
-  task_required_compatibilities = ["EC2"]
-  task_cpu                      = 1024
-  task_memory                   = 2048
+  task_required_compatibilities   = ["EC2"]
+  task_cpu                        = 1024
+  task_memory                     = 2048
+
+  #ECS service
+  ecs_service_launch_type         = "EC2"
+  ecs_service_scheduling_strategy = "DAEMON"
 }
 
 
