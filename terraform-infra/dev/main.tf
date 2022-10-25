@@ -73,4 +73,16 @@ module "my_ecs_tasks_and_service" {
   ecs_cluster_id                  = module.my_ecs_cluster.ecs_cluster_id
 }
 
+module "my_load_balancer" {
+  source                          = "../modules/load_balancer"
+
+  #VPC ID for public ALB target group
+  vpc_id                          = module.my_vpc.vpc_id
+  public_alb_target_asg_id        = module.my_ecs_cluster.ecs_cluster_asg_id
+
+  #Public ALB
+  public_subnet_ids               = module.my_vpc.public_subnet_ids
+  public_alb_security_group_ids   = module.my_security_groups.public_alb_security_group_id
+}
+
 
