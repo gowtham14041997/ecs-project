@@ -70,6 +70,7 @@ module "my_ecs_tasks_and_service" {
   #ECS service
   ecs_service_launch_type         = "EC2"
   ecs_service_scheduling_strategy = "DAEMON"
+  ecs_cluster_id                  = module.my_ecs_cluster.ecs_cluster_id
 }
 
 
