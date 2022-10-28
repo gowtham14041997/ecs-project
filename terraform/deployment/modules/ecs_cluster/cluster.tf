@@ -61,7 +61,7 @@ resource "aws_launch_template" "opstree_ecs_launch_template" {
   }
 
   network_interfaces {
-    associate_public_ip_address = false
+    associate_public_ip_address = true
     security_groups             = var.ecs_asg_security_groups # [aws_security_group.ecs_instance_security_group.id]
   }
 
