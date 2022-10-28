@@ -55,7 +55,7 @@ module "my_ecs_cluster" {
   ecs_asg_max_count           = 2
 
   #Subnets and security groups for ECS ASG
-  ecs_asg_subnet_ids          = module.my_vpc.ecs_subnet_ids
+  ecs_asg_subnet_ids          = module.my_vpc.public_subnet_ids
   ecs_asg_security_groups     = module.my_security_groups.ecs_instance_security_group_id
 }
 
